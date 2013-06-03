@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>G-Swap</title>
+</head>
+<body>
+
+  <script id="swapables" type="text/json">
+    var swapables = {
+      "words":[
+        "awesome",
+        "easy",
+        "customizable"
+      ]
+    }
+  </script>
+
+  <span>j-Swap is <span id="gswap">blahhhhh</span></span>
+
+  <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+  <script type="text/javascript" src="js/gswap.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('gswap').gswap();
+    });
+  </script>
+</body>
+</html>
