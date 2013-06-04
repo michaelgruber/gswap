@@ -56,8 +56,30 @@
             return options;
         }
 
+        var swapWidth = function() {
+
+            // Find the longest substitute string
+            var longest = substitute.items.sort(function (a, b) { 
+                return b.length - a.length; 
+            })[0];
+
+            // Calculate its width
+            var original = target.html();
+            var html = '<span>' + longest + '</span>';
+            target.html(html);
+            var width = target.find('span:first').width();
+            target.html(original);
+
+            return width;
+        }
+
         // ON INSTANTIATION
-        target.css({ position: "relative" });
+        target.css({
+            "position": "relative",
+            "width": swapWidth(),
+            "display": "inline-block",
+            "text-align": "center"
+        });
     };
 
     $.fn.gswap = function(options) { 
