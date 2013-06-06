@@ -4,8 +4,7 @@
 
         var substitute  = JSON.parse($('#gswapable').html());
         var target      = $('#gswap');
-        var current     = 0;
-        var howMany     = substitute.items.length;
+        var current     = substitute.length - 1;
         var inTime      = options.inTime * 1000;
         var outTime     = options.outTime * 1000;
         var pauseTime   = options.pauseTime * 1000;
@@ -19,11 +18,11 @@
         this.swap = function() {
 
             // Increment current or set loop to start
-            current = (current < howMany - 1) ? current + 1 : 0;
+            current = (substitute[current + 1]) ? current + 1 : 0;
 
             // Animate and swap
             target.animate(animateOut(), outTime, function(){
-                target.text(substitute.items[current]);
+                target.text(substitute[current]);
                 target.css(reset());
             });
             target.animate(animateIn(), inTime)
@@ -58,9 +57,15 @@
 
         var swapWidth = function() {
 
-            // Find the longest substitute string
-            var longest = substitute.items.sort(function (a, b) { 
-                return b.length - a.length; 
+            // Create a sortable array
+            var values = [];
+            for(var i in substitute) {
+                values.push(substitute[i]);
+            }
+
+            // Find the longest substitute string in that array
+            var longest = values.sort(function (a, b) {
+                return b.length - a.length;
             })[0];
 
             // Calculate its width
